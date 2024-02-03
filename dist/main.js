@@ -45,8 +45,12 @@ function run() {
                 llmProvider: core.getInput('LLM_PROVIDER', { required: true }),
                 azureEndpoint: core.getInput('AZURE_ENDPOINT'),
             };
+            console.log('Initializing octokit');
             const octokit = github.getOctokit(inputs.githubToken);
+            console.log('Octokit initialized');
+            console.log('Getting pull request number');
             const prNumber = (_a = github.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.number;
+            console.log('Got pull request number');
             if (!prNumber) {
                 throw new Error('No pull request number found.');
             }
@@ -56,8 +60,12 @@ function run() {
                 repo,
                 pull_number: prNumber,
             });
+            console.log('Got pull request');
             const prContent = pr.body + '\n\n' + pr.title;
+            console.log('Verifying pull request');
             const label = yield verify.verifyPullRequest(prContent, inputs.llmApiKey, inputs.llmProvider);
+            console.log('Verified pull request: ' + label);
+            console.log('Adding label to pull request');
             yield octokit.rest.issues.addLabels({
                 owner,
                 repo,

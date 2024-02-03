@@ -18,12 +18,17 @@ async function run(): Promise<void> {
             azureEndpoint: core.getInput('AZURE_ENDPOINT'),
         };
 
+        console.log('Initializing octokit')
         const octokit = github.getOctokit(inputs.githubToken);
+        console.log('Octokit initialized')
+        console.log('Getting pull request number')
         const prNumber = github.context.payload.pull_request?.number;
+        console.log('Got pull request number')
 
         if (!prNumber) {
             throw new Error('No pull request number found.');
         }
+
 
         const { owner, repo } = github.context.repo;
         const { data: pr } = await octokit.rest.pulls.get({
@@ -31,11 +36,15 @@ async function run(): Promise<void> {
             repo,
             pull_number: prNumber,
         });
+        console.log('Got pull request')
 
         const prContent = pr.body + '\n\n' + pr.title;
 
+        console.log('Verifying pull request')
         const label: string = await verify.verifyPullRequest(prContent, inputs.llmApiKey, inputs.llmProvider);
+        console.log('Verified pull request: ' + label)
 
+        console.log('Adding label to pull request')
         await octokit.rest.issues.addLabels({
             owner,
             repo,
