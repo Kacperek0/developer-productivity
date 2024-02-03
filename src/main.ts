@@ -21,6 +21,7 @@ async function run(): Promise<void> {
         console.log('Initializing octokit')
         const octokit = github.getOctokit(inputs.githubToken);
         console.log('Octokit initialized')
+
         console.log('Getting pull request number')
         const prNumber = github.context.payload.pull_request?.number;
         console.log('Got pull request number')
@@ -29,7 +30,7 @@ async function run(): Promise<void> {
             throw new Error('No pull request number found.');
         }
 
-
+        console.log('Getting pull request')
         const { owner, repo } = github.context.repo;
         const { data: pr } = await octokit.rest.pulls.get({
             owner,

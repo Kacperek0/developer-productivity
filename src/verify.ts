@@ -36,7 +36,7 @@ async function verifyPullRequest(prContent: string, llmApiKey: string, llmProvid
         if (label === 'S' || label === 'M' || label === 'L' || label === 'XL') {
             return label;
         } else {
-            throw new Error('Invalid label');
+            throw new Error('Invalid label, please rerun the action.');
         }
     } else {
         throw new Error('Unsupported LLM provider');

@@ -67,7 +67,7 @@ function verifyPullRequest(prContent, llmApiKey, llmProvider) {
                 return label;
             }
             else {
-                throw new Error('Invalid label');
+                throw new Error('Invalid label, please rerun the action.');
             }
         }
         else {

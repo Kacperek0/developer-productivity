@@ -54,6 +54,7 @@ function run() {
             if (!prNumber) {
                 throw new Error('No pull request number found.');
             }
+            console.log('Getting pull request');
             const { owner, repo } = github.context.repo;
             const { data: pr } = yield octokit.rest.pulls.get({
                 owner,
