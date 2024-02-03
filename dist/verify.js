@@ -37,6 +37,8 @@ const openai = __importStar(require("openai"));
 const prePrompt = `You are the automated code reviewer.
 Your task is to verify the pull request and label the complexity and size of a pull request.
 Possible labels are: S, M, L, XL.
+Smallest and easiest pull requests should be labeled S, while the largest and most complex pull requests should be labeled XL.
+Please make sure to verify the pull request and label it accordingly.
 Answer only with the label and nothing else.
 This is a pull request for the following issue:`;
 function verifyPullRequest(prContent, llmApiKey, llmProvider) {
@@ -58,7 +60,9 @@ function verifyPullRequest(prContent, llmApiKey, llmProvider) {
                 ],
             });
             // Parse the completion to get the label
+            console.log('Completion:', completion);
             const label = (_a = completion.choices[0].message.content) === null || _a === void 0 ? void 0 : _a.trim();
+            console.log('Label:', label);
             if (label === 'S' || label === 'M' || label === 'L' || label === 'XL') {
                 return label;
             }
