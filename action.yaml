@@ -1,0 +1,19 @@
+name: 'Complexity Evaluator'
+description: 'Evaluate the complexity of pull requests.'
+inputs:
+  GITHUB_TOKEN:
+    description: 'The GitHub token to use for authentication.'
+    required: true
+  LLM_API_KEY:
+    description: 'API Key for OpenAI or Azure OpenAI.'
+    required: true
+  LLM_PROVIDER:
+    description: 'Specify the LLM provider ("openai" or "azure").'
+    required: true
+    default: 'openai'
+  AZURE_ENDPOINT:
+    description: 'Custom endpoint for Azure OpenAI, if applicable.'
+    required: false
+runs:
+  using: 'node20'
+  main: 'dist/main.js'

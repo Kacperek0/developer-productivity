@@ -1,0 +1,21 @@
+{
+  "name": "developer-productivity",
+  "version": "1.0.0",
+  "description": "GitHub Action tool for measuring developer productivity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "openai": "^4.26.0"
+  }
+}
