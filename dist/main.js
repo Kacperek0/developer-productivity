@@ -40,10 +40,10 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const inputs = {
-                githubToken: core.getInput('github-token', { required: true }),
-                llmApiKey: core.getInput('llm-api-key', { required: true }),
-                llmProvider: core.getInput('llm-provider', { required: true }),
-                azureEndpoint: core.getInput('azure-endpoint'),
+                githubToken: core.getInput('GITHUB_TOKEN', { required: true }),
+                llmApiKey: core.getInput('LLM_API_KEY', { required: true }),
+                llmProvider: core.getInput('LLM_PROVIDER', { required: true }),
+                azureEndpoint: core.getInput('AZURE_ENDPOINT'),
             };
             const octokit = github.getOctokit(inputs.githubToken);
             const prNumber = (_a = github.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.number;
