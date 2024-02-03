@@ -12,10 +12,10 @@ interface ActionInputs {
 async function run(): Promise<void> {
     try {
         const inputs: ActionInputs = {
-            githubToken: core.getInput('github-token', { required: true }),
-            llmApiKey: core.getInput('llm-api-key', { required: true }),
-            llmProvider: core.getInput('llm-provider', { required: true }),
-            azureEndpoint: core.getInput('azure-endpoint'),
+            githubToken: core.getInput('GITHUB_TOKEN', { required: true }),
+            llmApiKey: core.getInput('LLM_API_KEY', { required: true }),
+            llmProvider: core.getInput('LLM_PROVIDER', { required: true }),
+            azureEndpoint: core.getInput('AZURE_ENDPOINT'),
         };
 
         const octokit = github.getOctokit(inputs.githubToken);
